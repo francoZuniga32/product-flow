@@ -1,9 +1,10 @@
 <template>
     <div>
-        hoasdfsdf
+        
     </div>
 </template>
-
 <script>
-export default {}
+export default {
+    
+}
 </script>
