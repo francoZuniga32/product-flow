@@ -6,7 +6,7 @@
       </span>
     </b-button>
 
-    <b-modal id="modal-1" size="xl" title="Entrada" @ok="send">
+    <b-modal id="modal-1" size="xl" title="Entrada" @ok="cargarEntrada">
       <b-row>
         <b-col sm>
           <b-form-group label="Remito">
@@ -43,10 +43,10 @@
           <b-form-group label="Productos">
             <el-select v-model="productos" multiple placeholder="Categoria">
               <el-option
-                v-for="item in selectProductos"
-                :key="item.value"
-                :label="item.text"
-                :value="item.value"
+                v-for="(item, i) in selectProductos"
+                :key="i"
+                :label="item.nombre"
+                :value="item.nombre"
               >
               </el-option>
             </el-select>
@@ -65,7 +65,7 @@ export default {
       remito: null,
       fecha: null,
       encargado: null,
-      productos: [],
+      productos: null,
       flujo: [],
       selectProductos: [],
       selectEncargado:[]
@@ -73,12 +73,8 @@ export default {
   },
   mounted() {
     this.sucursal = this.zfill(this.sucursal, 4);
-    for(var i = 0; i < this.$store.state.productos.length; i++){
-        this.selectProductos.push({ value: i, text: this.$store.state.productos[i].nombre});
-    }
-    for(var i = 0; i < this.$store.state.encargados.length; i++){
-        this.selectEncargado.push({ value: i, text: this.$store.state.encargados[i].text});
-    }
+    this.selectProductos = this.$store.state.productos;
+    this.selectEncargado = this.$store.state.encargados;
   },
   methods: {
     zfill(number, width) {
@@ -100,11 +96,9 @@ export default {
         }
       }
     },
-    send(){
-        console.log(this.remito && this.fecha && this.encargado && this.productos.length > 0)
-        if(this.remito && this.fecha && this.encargado && this.productos.length > 0){
-            this.$emit("addEntrada", { remito:`${ this.zfill(this.sucursal, 4) } - ${ this.zfill(this.remito, 8) }`, fecha: this.fecha, encargado: this.encargado, productos: this.productos});
-        }
+    cargarEntrada(){
+        console.log(this.productos);
+       this.$emit("addEntrada", { remito:`${ this.zfill(this.sucursal, 4) } - ${ this.zfill(this.remito, 8) }`, fecha: this.fecha, encargado: this.encargado, productos: this.productos});
     }
   }
 };

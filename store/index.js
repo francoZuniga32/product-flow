@@ -9,7 +9,7 @@ export const state = () => ({
     }],
     entradas: [],
     salidas:[],
-    flujo:[],
+    flujos:[],
     proceso1:[],
     proceso2:[],
     proceso3:[],
@@ -28,6 +28,19 @@ export const state = () => ({
       state.salidas.push(salida);
     },
     addFlujo(state, flujo){
-      state.flujo.push(flujo);
+      state.flujos.push(flujo);
+    },
+    addProceso1(state, proceso){
+      state.proceso1.push(proceso);
+      state.flujos[proceso.flujoid].p1 = state.proceso1.length -1;
+    },
+    addProceso2(state, proceso){
+      state.producto2.push(proceso);
+      state.flujos[proceso.flujoid].p2 = state.proceso2.length -2 ;
+      if(proceso.reprocesar){
+        
+      }else{
+        
+      }
     }
   }

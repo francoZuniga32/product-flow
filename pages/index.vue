@@ -1,6 +1,9 @@
 <template>
     <div>
-        hoasdfsdf
+        <h1 class="text-center">Product Flow</h1>
+        <hr>
+        <p>
+        </p>
     </div>
 </template>
 

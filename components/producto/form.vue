@@ -74,6 +74,8 @@
 </template>
 <script>
 export default {
+  created () {
+  },
   name: "formproducto",
   data() {
     return {
